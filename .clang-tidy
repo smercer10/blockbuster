@@ -14,22 +14,22 @@ Checks:
 	-zircon-*'
 
 CheckOptions:
-	- { key: readability-identifier-naming.ClassCase, 			  value: CamelCase  }
-	- { key: readability-identifier-naming.ConstantCase, 		  value: camelBack  }
-	- { key: readability-identifier-naming.EnumCase, 			  value: CamelCase  }
-	- { key: readability-identifier-naming.FunctionCase, 		  value: camelBack  }
-	- { key: readability-identifier-naming.MacroDefinitionCase,   value: UPPER_CASE }
-	- { key: readability-identifier-naming.NamespaceCase, 		  value: CamelCase  }
-	- { key: readability-identifier-naming.ParameterCase, 		  value: camelBack  }
-	- { key: readability-identifier-naming.PrivateMemberCase, 	  value: camelBack  }
-	- { key: readability-identifier-naming.PrivateMemberPrefix,   value: m_         }
-	- { key: readability-identifier-naming.StaticConstantCase, 	  value: camelBack  }
-	- { key: readability-identifier-naming.StaticConstantPrefix,  value: s_         }
-	- { key: readability-identifier-naming.StaticVariableCase, 	  value: camelBack  }
-	- { key: readability-identifier-naming.StaticVariablePrefix,  value: s_         }
-	- { key: readability-identifier-naming.StructCase, 			  value: CamelCase  }
-	- { key: readability-identifier-naming.TemplateParameterCase, value: CamelCase  }
-	- { key: readability-identifier-naming.TypeAliasCase, 		  value: CamelCase  }
-	- { key: readability-identifier-naming.VariableCase, 		  value: camelBack  }
+    readability-identifier-naming.ClassCase: CamelCase
+    readability-identifier-naming.ConstantCase: camelBack
+    readability-identifier-naming.EnumCase: CamelCase
+    readability-identifier-naming.FunctionCase: camelBack
+    readability-identifier-naming.MacroDefinitionCase: UPPER_CASE
+    readability-identifier-naming.NamespaceCase: CamelCase
+    readability-identifier-naming.ParameterCase: camelBack
+    readability-identifier-naming.PrivateMemberCase: camelBack
+    readability-identifier-naming.PrivateMemberPrefix: m_
+    readability-identifier-naming.StaticConstantCase: camelBack
+    readability-identifier-naming.StaticConstantPrefix: s_
+    readability-identifier-naming.StaticVariableCase: camelBack
+    readability-identifier-naming.StaticVariablePrefix: s_
+    readability-identifier-naming.StructCase: CamelCase
+    readability-identifier-naming.TemplateParameterCase: CamelCase
+    readability-identifier-naming.TypeAliasCase: CamelCase
+    readability-identifier-naming.VariableCase: camelBack
 
-FormatStyle: 'file'
+FormatStyle: file
