@@ -5,6 +5,7 @@ Checks:
 	-android-*,
 	-boost-*,
 	-darwin-*,
+	-fuchsia-trailing-return,
 	-linuxkernel-*,
 	-llvmlibc-*,
 	-mpi-*,
