@@ -31,7 +31,7 @@ public:
     auto operator=(Queue&&) -> Queue& = delete;
 
     /**
-     * @brief Enqueues an item into the queue.
+     * @brief Enqueues an item.
      *
      * @tparam U Type of the item to enqueue (allows for perfect forwarding).
      * @param item The item to enqueue.
@@ -53,7 +53,7 @@ public:
     }
 
     /**
-     * @brief Dequeues an item from the queue.
+     * @brief Dequeues an item.
      *
      * @return std::optional<T> containing the dequeued item if successful, or std::nullopt if the queue was empty.
      */
