@@ -1,0 +1,21 @@
+name: Deploy documentation
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: |
+          sudo apt install doxygen -y
+          doxygen
+
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/html

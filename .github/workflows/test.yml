@@ -1,4 +1,4 @@
-name: Blockbuster CI
+name: Test library
 
 on:
   - pull_request
@@ -6,8 +6,6 @@ on:
 
 jobs:
   test:
-    name: Run unit tests
-
     runs-on: ubuntu-latest
 
     steps:
