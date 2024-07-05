@@ -122,10 +122,11 @@ class Blockbuster::Spsc::Queue&lt; T, Capacity &gt;</h3>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The type of elements stored in the queue. </td></tr>
-    <tr><td class="paramname">Capacity</td><td>The maximum number of elements the queue can hold. Must be a power of 2. </td></tr>
+    <tr><td class="paramname">Capacity</td><td>The maximum number of elements the queue should hold. Must be a power of 2. </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note</dt><dd>The actual capacity is (Capacity - 1) due to implementation specifics. </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="abf0188175b2ee9c88f7704356df9b28d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abf0188175b2ee9c88f7704356df9b28d">&#9670;&nbsp;</a></span>capacity()</h2>
