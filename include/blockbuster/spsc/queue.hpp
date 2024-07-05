@@ -11,12 +11,13 @@ constexpr std::size_t cacheLineSize { 64 };
 /**
  * @brief A lock-free Single-Producer Single-Consumer (SPSC) queue.
  *
- * This queue is designed for efficient communication between a single producer
- * thread and a single consumer thread. It uses atomic operations and careful
- * memory ordering to ensure thread-safety without locks.
+ * This queue is designed for efficient communication between a single producer thread and a
+ * single consumer thread. It uses atomic operations and careful memory ordering to ensure
+ * thread-safety without locks.
  *
  * @tparam T The type of elements stored in the queue.
- * @tparam Capacity The maximum number of elements the queue can hold. Must be a power of 2.
+ * @tparam Capacity The maximum number of elements the queue should hold. Must be a power of 2.
+ * @note The actual capacity is (Capacity - 1) due to implementation specifics.
  */
 template <typename T, std::size_t Capacity>
 class Queue {
