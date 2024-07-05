@@ -40,11 +40,13 @@ public:
     template <typename U>
     auto enqueue(U&& item) -> bool
     {
-        const std::size_t currTail = m_tail.load(std::memory_order_relaxed);
-        const std::size_t nextTail = wrap(currTail + 1);
+        const std::size_t currTail { m_tail.load(std::memory_order_relaxed) };
+        const std::size_t nextTail { wrap(currTail + 1) };
+
         if (nextTail == m_head.load(std::memory_order_relaxed)) {
             return false;
         }
+
         m_buffer[currTail] = std::forward<U>(item);
         m_tail.store(nextTail, std::memory_order_release);
         return true;
@@ -58,9 +60,11 @@ public:
     auto dequeue() -> std::optional<T>
     {
         const std::size_t currHead { m_head.load(std::memory_order_relaxed) };
+
         if (currHead == m_tail.load(std::memory_order_acquire)) {
             return std::nullopt;
         }
+
         T item { std::move(m_buffer[currHead]) };
         m_head.store(wrap(currHead + 1), std::memory_order_release);
         return item;
@@ -116,7 +120,7 @@ private:
         return index & (m_capacity - 1);
     }
 
-    std::array<T, m_capacity> m_buffer;
+    std::array<T, m_capacity> m_buffer {};
 
     // Pad head and tail to avoid false sharing.
     alignas(cacheLineSize) std::atomic<std::size_t> m_head { 0 };
