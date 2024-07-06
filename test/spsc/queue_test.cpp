@@ -3,12 +3,12 @@
 #include <gtest/gtest.h>
 #include <thread>
 
+constexpr std::size_t capacity { 16 };
+constexpr std::size_t actualCapacity { capacity - 1 };
+
 class SpscQueueTest : public ::testing::Test {
 protected:
-    static constexpr std::size_t capacity { 16 };
-    static constexpr std::size_t actualCapacity { capacity - 1 };
-
-    Blockbuster::Spsc::Queue<int, capacity> queue;
+    Blockbuster::Spsc::Queue<int, capacity> queue {};
 };
 
 TEST_F(SpscQueueTest, EnqueueDequeue)
@@ -81,9 +81,9 @@ TEST_F(SpscQueueTest, WrapAround)
     }
 }
 
-TEST_F(SpscQueueTest, ProducerConsumerThreads)
+TEST_F(SpscQueueTest, SingleProducerAndConsumer)
 {
-    constexpr int iterations { 1000 };
+    constexpr int iterations { 1000000 };
 
     std::thread producer([this]() {
         for (int i { 0 }; i < iterations; ++i) {

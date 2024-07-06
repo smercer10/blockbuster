@@ -8,7 +8,7 @@ FetchContent_MakeAvailable(googletest)
 
 add_executable(
   mpmc_tests
-  mpmc/example_test.cpp
+  mpmc/queue_test.cpp
 )
 
 target_link_libraries(
