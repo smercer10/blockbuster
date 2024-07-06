@@ -75,6 +75,7 @@ public:
      * @brief Checks if the queue is empty.
      *
      * @return true if the queue is empty, false otherwise.
+     * @note The return value may be immediately outdated and should only be used as a heuristic.
      */
     [[nodiscard]] auto empty() const -> bool
     {
@@ -85,6 +86,7 @@ public:
      * @brief Checks if the queue is full.
      *
      * @return true if the queue is full, false otherwise.
+     * @note The return value may be immediately outdated and should only be used as a heuristic.
      */
     [[nodiscard]] auto full() const -> bool
     {
@@ -105,6 +107,7 @@ public:
      * @brief Returns the current number of elements in the queue.
      *
      * @return The current number of elements in the queue.
+     * @note The return value may be immediately outdated and should only be used as a heuristic.
      */
     [[nodiscard]] auto size() const -> std::size_t
     {
@@ -113,7 +116,7 @@ public:
 
 private:
     static constexpr std::size_t m_capacity { Capacity };
-    static_assert((m_capacity & (m_capacity - 1)) == 0, "Capacity must be a power of 2");
+    static_assert(m_capacity > 0 && (m_capacity & (m_capacity - 1)) == 0, "Capacity must be greater than 0 and a power of 2");
 
     // Wraps index to buffer bounds (equivalent to modulo when capacity is a power of 2).
     [[nodiscard]] auto wrap(std::size_t index) const -> std::size_t
@@ -123,7 +126,7 @@ private:
 
     std::array<T, m_capacity> m_buffer {};
 
-    // Pad head and tail to avoid false sharing.
+    // Pad as necessary to avoid false sharing.
     alignas(cacheLineSize) std::atomic<std::size_t> m_head { 0 };
     alignas(cacheLineSize) std::atomic<std::size_t> m_tail { 0 };
 };
