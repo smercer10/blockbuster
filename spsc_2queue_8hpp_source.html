@@ -120,51 +120,51 @@ $(function() {
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordflow">return</span> item;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classBlockbuster_1_1Spsc_1_1Queue.html#a517ee8a5ccda3a01aad2a5cf93b12f51">   79</a></span>&#160;    [[nodiscard]] <span class="keyword">auto</span> <a class="code" href="classBlockbuster_1_1Spsc_1_1Queue.html#a517ee8a5ccda3a01aad2a5cf93b12f51">empty</a>() const -&gt; <span class="keywordtype">bool</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    {</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">return</span> m_head.load(std::memory_order_relaxed) == m_tail.load(std::memory_order_relaxed);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="classBlockbuster_1_1Spsc_1_1Queue.html#a787186e313415749c9354b46c6020303">   89</a></span>&#160;    [[nodiscard]] <span class="keyword">auto</span> <a class="code" href="classBlockbuster_1_1Spsc_1_1Queue.html#a787186e313415749c9354b46c6020303">full</a>() const -&gt; <span class="keywordtype">bool</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    {</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordflow">return</span> wrap(m_tail.load(std::memory_order_relaxed) + 1) == m_head.load(std::memory_order_relaxed);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    }</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="classBlockbuster_1_1Spsc_1_1Queue.html#abf0188175b2ee9c88f7704356df9b28d">   99</a></span>&#160;    [[nodiscard]] constexpr <span class="keyword">auto</span> <a class="code" href="classBlockbuster_1_1Spsc_1_1Queue.html#abf0188175b2ee9c88f7704356df9b28d">capacity</a>() const -&gt; std::<span class="keywordtype">size_t</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    {</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keywordflow">return</span> m_capacity;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="classBlockbuster_1_1Spsc_1_1Queue.html#ac8229cd744e1ba73cda1dac7204b0298">  109</a></span>&#160;    [[nodiscard]] <span class="keyword">auto</span> <a class="code" href="classBlockbuster_1_1Spsc_1_1Queue.html#ac8229cd744e1ba73cda1dac7204b0298">size</a>() const -&gt; std::<span class="keywordtype">size_t</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    {</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keywordflow">return</span> wrap(m_tail.load(std::memory_order_relaxed) - m_head.load(std::memory_order_relaxed));</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    }</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keyword">static</span> constexpr std::size_t m_capacity { Capacity };</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    static_assert((m_capacity &amp; (m_capacity - 1)) == 0, <span class="stringliteral">&quot;Capacity must be a power of 2&quot;</span>);</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="comment">// Wraps index to buffer bounds (equivalent to modulo when capacity is a power of 2).</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    [[nodiscard]] <span class="keyword">auto</span> wrap(std::size_t index) <span class="keyword">const</span> -&gt; std::size_t</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    {</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="keywordflow">return</span> index &amp; (m_capacity - 1);</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    }</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    std::array&lt;T, m_capacity&gt; m_buffer {};</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="comment">// Pad head and tail to avoid false sharing.</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keyword">alignas</span>(cacheLineSize) std::atomic&lt;std::size_t&gt; m_head { 0 };</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keyword">alignas</span>(cacheLineSize) std::atomic&lt;std::size_t&gt; m_tail { 0 };</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;};</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;} <span class="comment">// namespace Blockbuster::Spsc</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="classBlockbuster_1_1Spsc_1_1Queue.html#a517ee8a5ccda3a01aad2a5cf93b12f51">   80</a></span>&#160;    [[nodiscard]] <span class="keyword">auto</span> <a class="code" href="classBlockbuster_1_1Spsc_1_1Queue.html#a517ee8a5ccda3a01aad2a5cf93b12f51">empty</a>() const -&gt; <span class="keywordtype">bool</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordflow">return</span> m_head.load(std::memory_order_relaxed) == m_tail.load(std::memory_order_relaxed);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="classBlockbuster_1_1Spsc_1_1Queue.html#a787186e313415749c9354b46c6020303">   91</a></span>&#160;    [[nodiscard]] <span class="keyword">auto</span> <a class="code" href="classBlockbuster_1_1Spsc_1_1Queue.html#a787186e313415749c9354b46c6020303">full</a>() const -&gt; <span class="keywordtype">bool</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">return</span> wrap(m_tail.load(std::memory_order_relaxed) + 1) == m_head.load(std::memory_order_relaxed);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="classBlockbuster_1_1Spsc_1_1Queue.html#abf0188175b2ee9c88f7704356df9b28d">  101</a></span>&#160;    [[nodiscard]] constexpr <span class="keyword">auto</span> <a class="code" href="classBlockbuster_1_1Spsc_1_1Queue.html#abf0188175b2ee9c88f7704356df9b28d">capacity</a>() const -&gt; std::<span class="keywordtype">size_t</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    {</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordflow">return</span> m_capacity;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="classBlockbuster_1_1Spsc_1_1Queue.html#ac8229cd744e1ba73cda1dac7204b0298">  112</a></span>&#160;    [[nodiscard]] <span class="keyword">auto</span> <a class="code" href="classBlockbuster_1_1Spsc_1_1Queue.html#ac8229cd744e1ba73cda1dac7204b0298">size</a>() const -&gt; std::<span class="keywordtype">size_t</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    {</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keywordflow">return</span> wrap(m_tail.load(std::memory_order_relaxed) - m_head.load(std::memory_order_relaxed));</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    }</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keyword">static</span> constexpr std::size_t m_capacity { Capacity };</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    static_assert(m_capacity &gt; 0 &amp;&amp; (m_capacity &amp; (m_capacity - 1)) == 0, <span class="stringliteral">&quot;Capacity must be greater than 0 and a power of 2&quot;</span>);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="comment">// Wraps index to buffer bounds (equivalent to modulo when capacity is a power of 2).</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    [[nodiscard]] <span class="keyword">auto</span> wrap(std::size_t index) <span class="keyword">const</span> -&gt; std::size_t</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    {</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keywordflow">return</span> index &amp; (m_capacity - 1);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    }</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    std::array&lt;T, m_capacity&gt; m_buffer {};</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="comment">// Pad as necessary to avoid false sharing.</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keyword">alignas</span>(cacheLineSize) std::atomic&lt;std::size_t&gt; m_head { 0 };</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keyword">alignas</span>(cacheLineSize) std::atomic&lt;std::size_t&gt; m_tail { 0 };</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;};</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;} <span class="comment">// namespace Blockbuster::Spsc</span></div>
 <div class="ttc" id="aclassBlockbuster_1_1Spsc_1_1Queue_html"><div class="ttname"><a href="classBlockbuster_1_1Spsc_1_1Queue.html">Blockbuster::Spsc::Queue</a></div><div class="ttdoc">A lock-free Single-Producer Single-Consumer (SPSC) queue.</div><div class="ttdef"><b>Definition:</b> queue.hpp:23</div></div>
-<div class="ttc" id="aclassBlockbuster_1_1Spsc_1_1Queue_html_a517ee8a5ccda3a01aad2a5cf93b12f51"><div class="ttname"><a href="classBlockbuster_1_1Spsc_1_1Queue.html#a517ee8a5ccda3a01aad2a5cf93b12f51">Blockbuster::Spsc::Queue::empty</a></div><div class="ttdeci">auto empty() const -&gt; bool</div><div class="ttdoc">Checks if the queue is empty.</div><div class="ttdef"><b>Definition:</b> queue.hpp:79</div></div>
+<div class="ttc" id="aclassBlockbuster_1_1Spsc_1_1Queue_html_a517ee8a5ccda3a01aad2a5cf93b12f51"><div class="ttname"><a href="classBlockbuster_1_1Spsc_1_1Queue.html#a517ee8a5ccda3a01aad2a5cf93b12f51">Blockbuster::Spsc::Queue::empty</a></div><div class="ttdeci">auto empty() const -&gt; bool</div><div class="ttdoc">Checks if the queue is empty.</div><div class="ttdef"><b>Definition:</b> queue.hpp:80</div></div>
 <div class="ttc" id="aclassBlockbuster_1_1Spsc_1_1Queue_html_a67ec428b4ce4e7eaf94a86b55794959c"><div class="ttname"><a href="classBlockbuster_1_1Spsc_1_1Queue.html#a67ec428b4ce4e7eaf94a86b55794959c">Blockbuster::Spsc::Queue::enqueue</a></div><div class="ttdeci">auto enqueue(U &amp;&amp;item) -&gt; bool</div><div class="ttdoc">Enqueues an item.</div><div class="ttdef"><b>Definition:</b> queue.hpp:42</div></div>
-<div class="ttc" id="aclassBlockbuster_1_1Spsc_1_1Queue_html_a787186e313415749c9354b46c6020303"><div class="ttname"><a href="classBlockbuster_1_1Spsc_1_1Queue.html#a787186e313415749c9354b46c6020303">Blockbuster::Spsc::Queue::full</a></div><div class="ttdeci">auto full() const -&gt; bool</div><div class="ttdoc">Checks if the queue is full.</div><div class="ttdef"><b>Definition:</b> queue.hpp:89</div></div>
+<div class="ttc" id="aclassBlockbuster_1_1Spsc_1_1Queue_html_a787186e313415749c9354b46c6020303"><div class="ttname"><a href="classBlockbuster_1_1Spsc_1_1Queue.html#a787186e313415749c9354b46c6020303">Blockbuster::Spsc::Queue::full</a></div><div class="ttdeci">auto full() const -&gt; bool</div><div class="ttdoc">Checks if the queue is full.</div><div class="ttdef"><b>Definition:</b> queue.hpp:91</div></div>
 <div class="ttc" id="aclassBlockbuster_1_1Spsc_1_1Queue_html_a7df103023d6bddde75a95897869b38a6"><div class="ttname"><a href="classBlockbuster_1_1Spsc_1_1Queue.html#a7df103023d6bddde75a95897869b38a6">Blockbuster::Spsc::Queue::dequeue</a></div><div class="ttdeci">auto dequeue() -&gt; std::optional&lt; T &gt;</div><div class="ttdoc">Dequeues an item.</div><div class="ttdef"><b>Definition:</b> queue.hpp:61</div></div>
-<div class="ttc" id="aclassBlockbuster_1_1Spsc_1_1Queue_html_abf0188175b2ee9c88f7704356df9b28d"><div class="ttname"><a href="classBlockbuster_1_1Spsc_1_1Queue.html#abf0188175b2ee9c88f7704356df9b28d">Blockbuster::Spsc::Queue::capacity</a></div><div class="ttdeci">constexpr auto capacity() const -&gt; std::size_t</div><div class="ttdoc">Returns the capacity of the queue.</div><div class="ttdef"><b>Definition:</b> queue.hpp:99</div></div>
-<div class="ttc" id="aclassBlockbuster_1_1Spsc_1_1Queue_html_ac8229cd744e1ba73cda1dac7204b0298"><div class="ttname"><a href="classBlockbuster_1_1Spsc_1_1Queue.html#ac8229cd744e1ba73cda1dac7204b0298">Blockbuster::Spsc::Queue::size</a></div><div class="ttdeci">auto size() const -&gt; std::size_t</div><div class="ttdoc">Returns the current number of elements in the queue.</div><div class="ttdef"><b>Definition:</b> queue.hpp:109</div></div>
+<div class="ttc" id="aclassBlockbuster_1_1Spsc_1_1Queue_html_abf0188175b2ee9c88f7704356df9b28d"><div class="ttname"><a href="classBlockbuster_1_1Spsc_1_1Queue.html#abf0188175b2ee9c88f7704356df9b28d">Blockbuster::Spsc::Queue::capacity</a></div><div class="ttdeci">constexpr auto capacity() const -&gt; std::size_t</div><div class="ttdoc">Returns the capacity of the queue.</div><div class="ttdef"><b>Definition:</b> queue.hpp:101</div></div>
+<div class="ttc" id="aclassBlockbuster_1_1Spsc_1_1Queue_html_ac8229cd744e1ba73cda1dac7204b0298"><div class="ttname"><a href="classBlockbuster_1_1Spsc_1_1Queue.html#ac8229cd744e1ba73cda1dac7204b0298">Blockbuster::Spsc::Queue::size</a></div><div class="ttdeci">auto size() const -&gt; std::size_t</div><div class="ttdoc">Returns the current number of elements in the queue.</div><div class="ttdef"><b>Definition:</b> queue.hpp:112</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
