@@ -8,7 +8,7 @@ constexpr std::size_t actualCapacity { capacity - 1 };
 
 class SpscQueueTest : public ::testing::Test {
 protected:
-    Blockbuster::Spsc::Queue<int, capacity> queue {};
+    Blockbuster::Spsc::Queue<int, capacity> queue;
 };
 
 TEST_F(SpscQueueTest, EnqueueDequeue)

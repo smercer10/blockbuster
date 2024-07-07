@@ -11,9 +11,8 @@ constexpr std::size_t cacheLineSize { 64 };
 /**
  * @brief A lock-free Single-Producer Single-Consumer (SPSC) queue.
  *
- * This queue is designed for efficient communication between a single producer thread and a
- * single consumer thread. It uses atomic operations and careful memory ordering to ensure
- * thread-safety without locks.
+ * This queue is designed for safe and efficient communication between a single producer thread and a
+ * single consumer thread without locks.
  *
  * @tparam T The type of elements stored in the queue.
  * @tparam Capacity The maximum number of elements the queue should hold. Must be a power of 2.
@@ -56,7 +55,7 @@ public:
     /**
      * @brief Dequeues an item.
      *
-     * @return std::optional<T> containing the dequeued item if successful, or std::nullopt if the queue was empty.
+     * @return An optional containing the dequeued item if successful, or std::nullopt if the queue was empty.
      */
     auto dequeue() -> std::optional<T>
     {
@@ -100,7 +99,7 @@ public:
      */
     [[nodiscard]] constexpr auto capacity() const -> std::size_t
     {
-        return m_capacity;
+        return s_capacity;
     }
 
     /**
@@ -115,16 +114,16 @@ public:
     }
 
 private:
-    static constexpr std::size_t m_capacity { Capacity };
-    static_assert(m_capacity > 0 && (m_capacity & (m_capacity - 1)) == 0, "Capacity must be greater than 0 and a power of 2");
+    static constexpr std::size_t s_capacity { Capacity };
+    static_assert(s_capacity > 0 && (s_capacity & (s_capacity - 1)) == 0, "Capacity must be greater than 0 and a power of 2");
 
     // Wraps index to buffer bounds (equivalent to modulo when capacity is a power of 2).
     [[nodiscard]] auto wrap(std::size_t index) const -> std::size_t
     {
-        return index & (m_capacity - 1);
+        return index & (s_capacity - 1);
     }
 
-    std::array<T, m_capacity> m_buffer {};
+    std::array<T, s_capacity> m_buffer {};
 
     // Pad as necessary to avoid false sharing.
     alignas(cacheLineSize) std::atomic<std::size_t> m_head { 0 };

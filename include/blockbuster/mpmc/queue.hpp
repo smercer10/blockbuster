@@ -11,9 +11,7 @@ constexpr std::size_t cacheLineSize { 64 };
 /**
  * @brief A lock-free Multi-Producer Multi-Consumer (MPMC) queue.
  *
- * This queue is designed for efficient communication between multiple producer threads and
- * multiple consumer threads. It uses atomic operations, careful memory ordering, and a
- * cell-based synchronization mechanism to ensure thread-safety without locks.
+ * This queue supports safe concurrent access from multiple producer and consumer threads without locks.
  *
  * @tparam T The type of elements stored in the queue.
  * @tparam Capacity The maximum number of elements the queue can hold. Must be a power of 2.
@@ -23,7 +21,7 @@ class Queue {
 public:
     Queue()
     {
-        for (std::size_t i { 0 }; i < m_capacity; ++i) {
+        for (std::size_t i { 0 }; i < s_capacity; ++i) {
             m_buffer[i].sequence.store(i, std::memory_order_relaxed);
         }
     }
@@ -70,11 +68,9 @@ public:
     }
 
     /**
-     * @brief Enqueues an item.
+     * @brief Dequeues an item.
      *
-     * @tparam U Type of the item to enqueue (allows for perfect forwarding).
-     * @param item The item to enqueue.
-     * @return true if the item was successfully enqueued, false if the queue was full.
+     * @return An optional containing the dequeued item if successful, or std::nullopt if the queue was empty.
      */
     auto dequeue() -> std::optional<T>
     {
@@ -98,7 +94,7 @@ public:
         }
 
         T result { std::move(cell->data) };
-        cell->sequence.store(pos + m_capacity, std::memory_order_release);
+        cell->sequence.store(pos + s_capacity, std::memory_order_release);
         return result;
     }
 
@@ -121,7 +117,7 @@ public:
      */
     [[nodiscard]] auto full() const -> bool
     {
-        return (m_enqueuePos.load(std::memory_order_relaxed) - m_dequeuePos.load(std::memory_order_relaxed)) >= m_capacity;
+        return (m_enqueuePos.load(std::memory_order_relaxed) - m_dequeuePos.load(std::memory_order_relaxed)) >= s_capacity;
     }
 
     /**
@@ -131,7 +127,7 @@ public:
      */
     [[nodiscard]] constexpr auto capacity() const -> std::size_t
     {
-        return m_capacity;
+        return s_capacity;
     }
 
     /**
@@ -151,16 +147,16 @@ private:
         T data {};
     };
 
-    static constexpr std::size_t m_capacity { Capacity };
-    static_assert(m_capacity > 0 && (m_capacity & (m_capacity - 1)) == 0, "Capacity must be greater than 0 and a power of 2");
+    static constexpr std::size_t s_capacity { Capacity };
+    static_assert(s_capacity > 0 && (s_capacity & (s_capacity - 1)) == 0, "Capacity must be greater than 0 and a power of 2");
 
     // Wraps index to buffer bounds (equivalent to modulo when capacity is a power of 2).
     [[nodiscard]] auto wrap(std::size_t index) const -> std::size_t
     {
-        return index & (m_capacity - 1);
+        return index & (s_capacity - 1);
     }
 
-    std::array<Cell, m_capacity> m_buffer {};
+    std::array<Cell, s_capacity> m_buffer {};
 
     // Pad as necessary to avoid false sharing.
     alignas(cacheLineSize) std::atomic<size_t> m_enqueuePos { 0 };

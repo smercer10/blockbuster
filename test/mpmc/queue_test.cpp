@@ -9,7 +9,7 @@ constexpr std::size_t capacity { 16 };
 
 class MpmcQueueTest : public ::testing::Test {
 protected:
-    Blockbuster::Mpmc::Queue<int, capacity> queue {};
+    Blockbuster::Mpmc::Queue<int, capacity> queue;
 };
 
 TEST_F(MpmcQueueTest, EnqueueDequeue)
