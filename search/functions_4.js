@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['get_18',['get',['../classBlockbuster_1_1Mpmc_1_1HashMap.html#acda19854fe11f3b94f6065750fb8a45b',1,'Blockbuster::Mpmc::HashMap']]]
+  ['size_13',['size',['../classBlockbuster_1_1Mpmc_1_1Queue.html#aa9b36d86cdfdc63c1cea5b996aa71de5',1,'Blockbuster::Mpmc::Queue::size()'],['../classBlockbuster_1_1Spsc_1_1Queue.html#ac8229cd744e1ba73cda1dac7204b0298',1,'Blockbuster::Spsc::Queue::size()']]]
 ];

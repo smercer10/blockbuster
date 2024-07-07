@@ -118,7 +118,7 @@ auto&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a cla
 class Blockbuster::Spsc::Queue&lt; T, Capacity &gt;</h3>
 
 <p>A lock-free Single-Producer Single-Consumer (SPSC) queue. </p>
-<p>This queue is designed for efficient communication between a single producer thread and a single consumer thread. It uses atomic operations and careful memory ordering to ensure thread-safety without locks.</p>
+<p>This queue is designed for safe and efficient communication between a single producer thread and a single consumer thread without locks.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The type of elements stored in the queue. </td></tr>
@@ -186,7 +186,7 @@ template&lt;typename T , std::size_t Capacity&gt; </div>
 </div><div class="memdoc">
 
 <p>Dequeues an item. </p>
-<dl class="section return"><dt>Returns</dt><dd>std::optional&lt;T&gt; containing the dequeued item if successful, or std::nullopt if the queue was empty. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>An optional containing the dequeued item if successful, or std::nullopt if the queue was empty. </dd></dl>
 
 </div>
 </div>

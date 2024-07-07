@@ -99,7 +99,7 @@ auto&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a cla
 <tr class="memdesc:a499d54634afc6cbe447f808858ae44a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues an item.  <a href="classBlockbuster_1_1Mpmc_1_1Queue.html#a499d54634afc6cbe447f808858ae44a4">More...</a><br /></td></tr>
 <tr class="separator:a499d54634afc6cbe447f808858ae44a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49348f411d0379a0640d52258e677ef3"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockbuster_1_1Mpmc_1_1Queue.html#a49348f411d0379a0640d52258e677ef3">dequeue</a> () -&gt; std::optional&lt; T &gt;</td></tr>
-<tr class="memdesc:a49348f411d0379a0640d52258e677ef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues an item.  <a href="classBlockbuster_1_1Mpmc_1_1Queue.html#a49348f411d0379a0640d52258e677ef3">More...</a><br /></td></tr>
+<tr class="memdesc:a49348f411d0379a0640d52258e677ef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dequeues an item.  <a href="classBlockbuster_1_1Mpmc_1_1Queue.html#a49348f411d0379a0640d52258e677ef3">More...</a><br /></td></tr>
 <tr class="separator:a49348f411d0379a0640d52258e677ef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6c96e8ddd6fe131dbdee063c8642772"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockbuster_1_1Mpmc_1_1Queue.html#aa6c96e8ddd6fe131dbdee063c8642772">empty</a> () const -&gt; bool</td></tr>
 <tr class="memdesc:aa6c96e8ddd6fe131dbdee063c8642772"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the queue is empty.  <a href="classBlockbuster_1_1Mpmc_1_1Queue.html#aa6c96e8ddd6fe131dbdee063c8642772">More...</a><br /></td></tr>
@@ -119,7 +119,7 @@ auto&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a cla
 class Blockbuster::Mpmc::Queue&lt; T, Capacity &gt;</h3>
 
 <p>A lock-free Multi-Producer Multi-Consumer (MPMC) queue. </p>
-<p>This queue is designed for efficient communication between multiple producer threads and multiple consumer threads. It uses atomic operations, careful memory ordering, and a cell-based synchronization mechanism to ensure thread-safety without locks.</p>
+<p>This queue supports safe concurrent access from multiple producer and consumer threads without locks.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The type of elements stored in the queue. </td></tr>
@@ -185,20 +185,8 @@ template&lt;typename T , std::size_t Capacity&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Enqueues an item. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">U</td><td>Type of the item to enqueue (allows for perfect forwarding). </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">item</td><td>The item to enqueue. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the item was successfully enqueued, false if the queue was full. </dd></dl>
+<p>Dequeues an item. </p>
+<dl class="section return"><dt>Returns</dt><dd>An optional containing the dequeued item if successful, or std::nullopt if the queue was empty. </dd></dl>
 
 </div>
 </div>
