@@ -1,9 +1,11 @@
+// NOLINTBEGIN(llvm-include-order)
 #include "mpmc/queue.hpp"
 #include <algorithm>
 #include <atomic>
 #include <cstddef>
 #include <gtest/gtest.h>
 #include <thread>
+// NOLINTEND(llvm-include-order)
 
 constexpr std::size_t capacity { 16 };
 

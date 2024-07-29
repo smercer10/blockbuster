@@ -1,7 +1,9 @@
+// NOLINTBEGIN(llvm-include-order)
 #include "spsc/queue.hpp"
 #include <cstddef>
 #include <gtest/gtest.h>
 #include <thread>
+// NOLINTEND(llvm-include-order)
 
 constexpr std::size_t capacity { 16 };
 constexpr std::size_t actualCapacity { capacity - 1 };

@@ -65,7 +65,7 @@ public:
             return std::nullopt;
         }
 
-        T item { std::move(m_buffer[currHead]) };
+        const T item { std::move(m_buffer[currHead]) };
         m_head.store(wrap(currHead + 1), std::memory_order_release);
         return item;
     }
@@ -114,7 +114,7 @@ public:
     }
 
 private:
-    static constexpr std::size_t s_capacity { Capacity };
+    static constexpr std::size_t s_capacity { Capacity }; // NOLINT(readability-identifier-naming)
     static_assert(s_capacity > 0 && (s_capacity & (s_capacity - 1)) == 0, "Capacity must be greater than 0 and a power of 2");
 
     // Wraps index to buffer bounds (equivalent to modulo when capacity is a power of 2).

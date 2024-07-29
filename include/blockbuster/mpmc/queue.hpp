@@ -48,8 +48,8 @@ public:
 
         for (;;) {
             cell = &m_buffer[wrap(pos)];
-            std::size_t seq { cell->sequence.load(std::memory_order_acquire) };
-            intptr_t dif { static_cast<intptr_t>(seq) - static_cast<intptr_t>(pos) };
+            const std::size_t seq { cell->sequence.load(std::memory_order_acquire) };
+            const intptr_t dif { static_cast<intptr_t>(seq) - static_cast<intptr_t>(pos) };
 
             if (dif == 0) {
                 if (m_enqueuePos.compare_exchange_weak(pos, pos + 1, std::memory_order_relaxed)) {
@@ -79,8 +79,8 @@ public:
 
         for (;;) {
             cell = &m_buffer[wrap(pos)];
-            std::size_t seq { cell->sequence.load(std::memory_order_acquire) };
-            intptr_t dif { static_cast<intptr_t>(seq) - static_cast<intptr_t>(pos + 1) };
+            const std::size_t seq { cell->sequence.load(std::memory_order_acquire) };
+            const intptr_t dif { static_cast<intptr_t>(seq) - static_cast<intptr_t>(pos + 1) };
 
             if (dif == 0) {
                 if (m_dequeuePos.compare_exchange_weak(pos, pos + 1, std::memory_order_relaxed)) {
@@ -93,7 +93,7 @@ public:
             }
         }
 
-        T result { std::move(cell->data) };
+        const T result { std::move(cell->data) };
         cell->sequence.store(pos + s_capacity, std::memory_order_release);
         return result;
     }
@@ -147,7 +147,7 @@ private:
         T data {};
     };
 
-    static constexpr std::size_t s_capacity { Capacity };
+    static constexpr std::size_t s_capacity { Capacity }; // NOLINT(readability-identifier-naming)
     static_assert(s_capacity > 0 && (s_capacity & (s_capacity - 1)) == 0, "Capacity must be greater than 0 and a power of 2");
 
     // Wraps index to buffer bounds (equivalent to modulo when capacity is a power of 2).
