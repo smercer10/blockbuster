@@ -1,18 +1,18 @@
 Checks:
-	'*,
-	-abseil-*,
-	-altera-*,
-	-android-*,
-	-boost-*,
-	-darwin-*,
-	-fuchsia-trailing-return,
-	-linuxkernel-*,
-	-llvmlibc-*,
-	-mpi-*,
-	-objc-*,
-	-openmp-*,
-	-readability-identifier-length,
-	-zircon-*'
+    '*,
+    -abseil-*,
+    -altera-*,
+    -android-*,
+    -boost-*,
+    -darwin-*,
+    -fuchsia-trailing-return,
+    -linuxkernel-*,
+    -llvmlibc-*,
+    -mpi-*,
+    -objc-*,
+    -openmp-*,
+    -readability-identifier-length,
+    -zircon-*'  
 
 CheckOptions:
     readability-identifier-naming.ClassCase: CamelCase
