@@ -1,15 +1,15 @@
 MAKEFLAGS += --no-print-directory
 
-BUILD_DIR = build
+BUILD_DIR := build
 
-all:
+build:
 	cmake -S . -B $(BUILD_DIR)
 	cmake --build $(BUILD_DIR)
 
-test: all
-	cd $(BUILD_DIR) && ctest
+test: build
+	cd $(BUILD_DIR) && ctest --output-on-failure
 
 clean:
 	rm -rf $(BUILD_DIR)
 
-.PHONY: all test clean
+.PHONY: build test clean
