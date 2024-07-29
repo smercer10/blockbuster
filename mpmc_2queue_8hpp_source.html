@@ -105,8 +105,8 @@ $(function() {
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordflow">for</span> (;;) {</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            cell = &amp;m_buffer[wrap(pos)];</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            std::size_t seq { cell-&gt;sequence.load(std::memory_order_acquire) };</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            intptr_t dif { <span class="keyword">static_cast&lt;</span>intptr_t<span class="keyword">&gt;</span>(seq) - <span class="keyword">static_cast&lt;</span>intptr_t<span class="keyword">&gt;</span>(pos) };</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keyword">const</span> std::size_t seq { cell-&gt;sequence.load(std::memory_order_acquire) };</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keyword">const</span> intptr_t dif { <span class="keyword">static_cast&lt;</span>intptr_t<span class="keyword">&gt;</span>(seq) - <span class="keyword">static_cast&lt;</span>intptr_t<span class="keyword">&gt;</span>(pos) };</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keywordflow">if</span> (dif == 0) {</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <span class="keywordflow">if</span> (m_enqueuePos.compare_exchange_weak(pos, pos + 1, std::memory_order_relaxed)) {</div>
@@ -131,8 +131,8 @@ $(function() {
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">for</span> (;;) {</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            cell = &amp;m_buffer[wrap(pos)];</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            std::size_t seq { cell-&gt;sequence.load(std::memory_order_acquire) };</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            intptr_t dif { <span class="keyword">static_cast&lt;</span>intptr_t<span class="keyword">&gt;</span>(seq) - <span class="keyword">static_cast&lt;</span>intptr_t<span class="keyword">&gt;</span>(pos + 1) };</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="keyword">const</span> std::size_t seq { cell-&gt;sequence.load(std::memory_order_acquire) };</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keyword">const</span> intptr_t dif { <span class="keyword">static_cast&lt;</span>intptr_t<span class="keyword">&gt;</span>(seq) - <span class="keyword">static_cast&lt;</span>intptr_t<span class="keyword">&gt;</span>(pos + 1) };</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="keywordflow">if</span> (dif == 0) {</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                <span class="keywordflow">if</span> (m_dequeuePos.compare_exchange_weak(pos, pos + 1, std::memory_order_relaxed)) {</div>
@@ -145,7 +145,7 @@ $(function() {
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            }</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        }</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        T result { std::move(cell-&gt;data) };</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keyword">const</span> T result { std::move(cell-&gt;data) };</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        cell-&gt;sequence.store(pos + s_capacity, std::memory_order_release);</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordflow">return</span> result;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    }</div>
@@ -176,7 +176,7 @@ $(function() {
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        T data {};</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    };</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keyword">static</span> constexpr std::size_t s_capacity { Capacity };</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keyword">static</span> constexpr std::size_t s_capacity { Capacity }; <span class="comment">// NOLINT(readability-identifier-naming)</span></div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    static_assert(s_capacity &gt; 0 &amp;&amp; (s_capacity &amp; (s_capacity - 1)) == 0, <span class="stringliteral">&quot;Capacity must be greater than 0 and a power of 2&quot;</span>);</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="comment">// Wraps index to buffer bounds (equivalent to modulo when capacity is a power of 2).</span></div>

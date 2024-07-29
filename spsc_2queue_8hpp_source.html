@@ -115,7 +115,7 @@ $(function() {
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordflow">return</span> std::nullopt;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        }</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        T item { std::move(m_buffer[currHead]) };</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keyword">const</span> T item { std::move(m_buffer[currHead]) };</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        m_head.store(wrap(currHead + 1), std::memory_order_release);</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordflow">return</span> item;</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
@@ -141,7 +141,7 @@ $(function() {
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    }</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keyword">static</span> constexpr std::size_t s_capacity { Capacity };</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keyword">static</span> constexpr std::size_t s_capacity { Capacity }; <span class="comment">// NOLINT(readability-identifier-naming)</span></div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    static_assert(s_capacity &gt; 0 &amp;&amp; (s_capacity &amp; (s_capacity - 1)) == 0, <span class="stringliteral">&quot;Capacity must be greater than 0 and a power of 2&quot;</span>);</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="comment">// Wraps index to buffer bounds (equivalent to modulo when capacity is a power of 2).</span></div>
