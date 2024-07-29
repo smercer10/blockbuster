@@ -1,4 +1,4 @@
-#include "blockbuster/spsc/queue.hpp"
+#include "spsc/queue.hpp"
 #include <cstddef>
 #include <gtest/gtest.h>
 #include <thread>

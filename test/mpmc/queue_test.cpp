@@ -1,4 +1,4 @@
-#include "blockbuster/mpmc/queue.hpp"
+#include "mpmc/queue.hpp"
 #include <algorithm>
 #include <atomic>
 #include <cstddef>
