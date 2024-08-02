@@ -1,6 +1,6 @@
 # Blockbuster
 
-Blockbuster is a WIP collection of efficient and non-blocking (lock-free, not wait-free) data structures for C++. It is by no means production-ready, and probably never will be, as it is primarily a learning exercise.
+Blockbuster is a WIP collection of efficient and non-blocking data structures for C++. It is by no means production-ready, and probably never will be, as it is primarily a learning exercise.
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/smercer10/blockbuster/blob/main/LICENSE)
 [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/smercer10/blockbuster/test.yml?label=CI)](https://github.com/smercer10/blockbuster/actions/workflows/test.yml)
@@ -12,11 +12,11 @@ The following data structures are currently implemented (documentation can be fo
 
 ### Single-Producer, Single-Consumer (SPSC)
 
-- Queue (generic, fixed capacity)
+- Queue (generic, fixed capacity, wait-free)
 
 ### Multi-Producer, Multi-Consumer (MPMC)
 
-- Queue (generic, fixed capacity)
+- Queue (generic, fixed capacity, lock-free)
 
 ## Build Locally
 

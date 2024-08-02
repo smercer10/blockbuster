@@ -9,7 +9,7 @@ namespace Blockbuster::Spsc {
 constexpr std::size_t cacheLineSize { 64 };
 
 /**
- * @brief A lock-free Single-Producer Single-Consumer (SPSC) queue.
+ * @brief A wait-free Single-Producer Single-Consumer (SPSC) queue.
  *
  * This queue is designed for safe and efficient communication between a single producer thread and a
  * single consumer thread without locks.
