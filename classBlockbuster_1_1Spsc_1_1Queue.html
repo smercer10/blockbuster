@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Blockbuster
    </div>
-   <div id="projectbrief">Collection of lock-free data structures for C++17.</div>
+   <div id="projectbrief">Collection of non-blocking data structures for C++17.</div>
   </td>
  </tr>
  </tbody>
@@ -74,7 +74,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>A lock-free Single-Producer Single-Consumer (SPSC) queue.  
+<p>A wait-free Single-Producer Single-Consumer (SPSC) queue.  
  <a href="classBlockbuster_1_1Spsc_1_1Queue.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="spsc_2queue_8hpp_source.html">queue.hpp</a>&gt;</code></p>
@@ -117,7 +117,7 @@ auto&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a cla
 <div class="textblock"><h3>template&lt;typename T, std::size_t Capacity&gt;<br />
 class Blockbuster::Spsc::Queue&lt; T, Capacity &gt;</h3>
 
-<p>A lock-free Single-Producer Single-Consumer (SPSC) queue. </p>
+<p>A wait-free Single-Producer Single-Consumer (SPSC) queue. </p>
 <p>This queue is designed for safe and efficient communication between a single producer thread and a single consumer thread without locks.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
